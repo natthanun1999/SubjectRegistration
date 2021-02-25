@@ -12,7 +12,7 @@
             @csrf
             <input type="text" name="q" class="form-control" placeholder="ค้นหา">
             <button type="submit" class="btn btn-primary">ค้นหา</button>
-            <a href="{{ URL::to('subject/edit') }}" class="btn btn-success pull-right">เพิ่มรายวิชา</a>
+            <a href="{{ URL::to('subject/add') }}" class="btn btn-success pull-right">เพิ่มรายวิชา</a>
         </form>
     </div>
     <table class="table table-bordered table-striped bs-table">
@@ -29,7 +29,7 @@
                 <td>{{ $subject->subject_id }}</td>
                 <td>{{ $subject->name }}</td>
                 <td class="bs-center">
-                    <a href="#" class="btn btn-warning">แก้ไข</a>
+                    <a href="#" class="btn btn-warning edit" id-edit={{ $subject->id }}>แก้ไข</a>
                     <a href="#" class="btn btn-danger delete" id-delete="{{ $subject->id }}">ลบ</a>
                 </td>
             </tr>
@@ -43,8 +43,13 @@
 </div>
 
 <script>
+    $('.edit').on('click', function () {
+        var url = "{{ URL::to('subject/edit') }}" + "/" + $(this).attr('id-edit')
+        window.location.href = url
+    })
+
     $('.delete').on('click', function () {
-        if (confirm('คุณต้องการลบข้อมูลสินค้าหรือไม่ ?')) {
+        if (confirm('คุณต้องการลบข้อมูลวิชาหรือไม่ ?')) {
             var url = "{{ URL::to('subject/remove') }}" + "/" + $(this).attr('id-delete')
             window.location.href = url
         }

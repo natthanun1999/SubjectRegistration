@@ -12,7 +12,7 @@
             @csrf
             <input type="text" name="q" class="form-control" placeholder="ค้นหา">
             <button type="submit" class="btn btn-primary">ค้นหา</button>
-            <a href="{{ URL::to('student/edit') }}" class="btn btn-success pull-right">เพิ่มนักศึกษา</a>
+            <a href="{{ URL::to('student/add') }}" class="btn btn-success pull-right">เพิ่มนักศึกษา</a>
         </form>
     </div>
     <table class="table table-bordered table-striped bs-table">
@@ -33,7 +33,7 @@
                 <td>{{ $std->firstname }} {{ $std->lastname }}</td>
                 <td>{{ $std->subject->name }}</td>
                 <td class="bs-center">
-                    <a href="#" class="btn btn-warning">แก้ไข</a>
+                    <a href="#" class="btn btn-warning edit" id-edit={{ $std->id }}>แก้ไข</a>
                     <a href="#" class="btn btn-danger delete" id-delete="{{ $std->id }}">ลบ</a>
                 </td>
             </tr>
@@ -47,6 +47,11 @@
 </div>
 
 <script>
+    $('.edit').on('click', function () {
+        var url = "{{ URL::to('student/edit') }}" + "/" + $(this).attr('id-edit')
+        window.location.href = url
+    })
+
     $('.delete').on('click', function () {
         if (confirm('คุณต้องการลบข้อมูลสินค้าหรือไม่ ?')) {
             var url = "{{ URL::to('student/remove') }}" + "/" + $(this).attr('id-delete')
