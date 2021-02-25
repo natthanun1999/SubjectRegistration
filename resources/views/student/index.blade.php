@@ -28,7 +28,7 @@
         <tbody>
             @foreach ($students as $std)
             <tr>
-                <td><img src="{{ $std->image_url }}" width="50px"></td>
+                <td><img src="http://127.0.0.1:8000/{{ $std->image_url }}" width="50px"></td>
                 <td>{{ $std->stdID }}</td>
                 <td>{{ $std->firstname }} {{ $std->lastname }}</td>
                 <td>{{ $std->subject->name }}</td>
